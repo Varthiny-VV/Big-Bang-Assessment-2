@@ -13,8 +13,8 @@ namespace BigBangAssessment_2.Models
         [Key]
         public int UserId { get; set; } 
         public string Name { get; set; }
-        public byte[]? HashKey { get; set; }
-        public byte[]? Password { get; set; }
+        public byte[]? PasswordHash { get; set; }
+        public byte[]? PasswordKey { get; set; }
         public string Role { get; set; }
     }
 }

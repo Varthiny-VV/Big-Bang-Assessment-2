@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BigBangAssessment_2.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230630074053_init")]
+    [Migration("20230630143143_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,13 +57,15 @@ namespace BigBangAssessment_2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("User")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("status")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool?>("status")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Doctors");
                 });
@@ -89,6 +91,9 @@ namespace BigBangAssessment_2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("DischargeDate")
                         .HasColumnType("datetime2");
 
@@ -109,12 +114,14 @@ namespace BigBangAssessment_2.Migrations
                     b.Property<string>("Symtoms")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("User")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DoctorId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Patients");
                 });
@@ -127,14 +134,14 @@ namespace BigBangAssessment_2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
 
-                    b.Property<byte[]>("HashKey")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Password")
+                    b.Property<byte[]>("PasswordHash")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("PasswordKey")
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Role")
@@ -146,11 +153,26 @@ namespace BigBangAssessment_2.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("BigBangAssessment_2.Models.Doctor", b =>
+                {
+                    b.HasOne("BigBangAssessment_2.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("BigBangAssessment_2.Models.Patient", b =>
                 {
                     b.HasOne("BigBangAssessment_2.Models.Doctor", null)
                         .WithMany("PatientList")
                         .HasForeignKey("DoctorId");
+
+                    b.HasOne("BigBangAssessment_2.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BigBangAssessment_2.Models.Doctor", b =>

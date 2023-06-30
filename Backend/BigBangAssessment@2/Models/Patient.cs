@@ -12,7 +12,6 @@ namespace BigBangAssessment_2.Models
             Name = string.Empty;
             Gender = "Unknown";
             PhoneNumber = string.Empty;
-            DateOfBirth = DateOnly.MinValue;
             BloodType = string.Empty;
             CurrentMedications = string.Empty;
         }
@@ -25,8 +24,8 @@ namespace BigBangAssessment_2.Models
         public string Name { get; set; }
         [Required(ErrorMessage = "Gender cannot be empty")]
         public string Gender { get; set; }
-        [NotMapped]
-        public DateOnly DateOfBirth { get; set; }
+        
+        public DateTime DateOfBirth { get; set; }
         public string? PhoneNumber { get; set; }
         public string? Address { get; set; }
         public string? BloodType { get; set; }
@@ -36,7 +35,7 @@ namespace BigBangAssessment_2.Models
         public DateTime? DischargeDate { get; set; }
         public string CurrentMedications { get; set; }
         public string? Symtoms { get; set; }
-        public string? User { get; set; }
+        public User? User { get; set; }
         
         
     }

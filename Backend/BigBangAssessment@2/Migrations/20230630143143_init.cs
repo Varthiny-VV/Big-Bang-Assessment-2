@@ -10,6 +10,22 @@ namespace BigBangAssessment_2.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PasswordHash = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    PasswordKey = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.UserId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Doctors",
                 columns: table => new
                 {
@@ -22,28 +38,17 @@ namespace BigBangAssessment_2.Migrations
                     Speciality = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Experience = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConsultationFee = table.Column<double>(type: "float", nullable: true),
-                    status = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    User = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    status = table.Column<bool>(type: "bit", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Doctors", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HashKey = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    Password = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.ForeignKey(
+                        name: "FK_Doctors_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId");
                 });
 
             migrationBuilder.CreateTable(
@@ -54,6 +59,7 @@ namespace BigBangAssessment_2.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BloodType = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -61,7 +67,7 @@ namespace BigBangAssessment_2.Migrations
                     DischargeDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CurrentMedications = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Symtoms = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    User = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     DoctorId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -72,12 +78,27 @@ namespace BigBangAssessment_2.Migrations
                         column: x => x.DoctorId,
                         principalTable: "Doctors",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Patients_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Doctors_UserId",
+                table: "Doctors",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Patients_DoctorId",
                 table: "Patients",
                 column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Patients_UserId",
+                table: "Patients",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -86,10 +107,10 @@ namespace BigBangAssessment_2.Migrations
                 name: "Patients");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Doctors");
 
             migrationBuilder.DropTable(
-                name: "Doctors");
+                name: "Users");
         }
     }
 }

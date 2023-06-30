@@ -1,4 +1,6 @@
+using BigBangAssessment_2.Interfaces;
 using BigBangAssessment_2.Models;
+using BigBangAssessment_2.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -22,6 +24,13 @@ namespace BigBangAssessment_2
             {
                 opts.UseSqlServer(builder.Configuration.GetConnectionString("conn"));
             });
+            builder.Services.AddScoped<IRepo<string,Doctor>,DoctorRepo>();
+            builder.Services.AddScoped<IRepo<string, Patient>,PatientRepo>();
+            builder.Services.AddScoped<IRepo<string, User>,UserRepo>();
+            builder.Services.AddScoped<IGeneratePassword,GeneratePasswordService>();
+            builder.Services.AddScoped<IGenerateToken, GenerateTokenService>();
+            builder.Services.AddScoped<IManageUser,UserService>();
+
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {

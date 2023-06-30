@@ -1,6 +1,6 @@
 ﻿namespace BigBangAssessment_2.Models.DTOs
 {
-    public class UserDTO
+    public class UserDTO 
     {
         public UserDTO()
         {
