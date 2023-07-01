@@ -59,7 +59,7 @@ namespace BigBangAssessment_2.Services
 
             patient.User.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(generatedPassword));
             patient.User.PasswordKey = hmac.Key;
-            patient.User.Role = "Admin";
+            patient.User.Role = "Patient";
             patient.User.Name = patient.Name;
             //patient.User.Status = "Not Approved";
 
