@@ -22,7 +22,7 @@ namespace BigBangAssessment_2.Models
         public string Name { get; set;}
         [Required(ErrorMessage = "Gender cannot be empty")]
         public string Gender { get; set; }
-        [NotMapped]
+    
         public string Age { get; set; }
         public string?  Email { get; set;}
         public string PhoneNumber { get; set;}

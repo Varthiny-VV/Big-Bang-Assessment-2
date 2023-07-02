@@ -1,0 +1,39 @@
+.body{
+    margin: 0;
+}
+
+.carousel {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%; 
+  }
+  
+.container {
+    padding-left: 10px; 
+    padding-right: 10px; 
+    align-self: center;
+  }
+
+h6 {
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+.reviewers {
+    border-radius: 50%;
+}
+
+h6{
+    font-size: 15px;
+}
+
+.icon-square {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+}
+
+.row.justify-content-center {
+    column-gap: 60px;
+}
+

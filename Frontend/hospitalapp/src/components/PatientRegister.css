@@ -1,0 +1,61 @@
+.background {
+    background-repeat:no-repeat;
+    background-image: url('d:\kanini\BigBangAssessment@2Solution\Frontend\hospitalapp\src\images\bg.jpg');
+    background-position: center ;
+    background-size: cover;
+    align-items: center;
+    min-height: 100vh; 
+   
+}
+  
+
+  .header{
+    
+    font-family:'Times New Roman', Times, serif;
+    text-align: center;
+    font-weight: bold;
+    color: #000000;
+    
+    
+  }
+.header.transbox{
+    
+    background-color: rgb(167, 167, 226);
+    border: 1px solid black;
+    opacity: 0.8;
+}
+
+.form-label{
+    font-size:large;
+    font-weight: bold;
+    color: #000000;
+}
+
+.form-control{
+    border:black solid 1px;
+}
+
+.form-select{
+    border:black solid 1px;
+}
+
+.row.transbox{
+    margin: 30px;
+    background-color: #ffffff;
+    border: 1px solid black;
+    opacity: 0.65;
+}
+
+.btn{
+
+    background: blue;
+    margin-bottom:1.5%;
+ 
+}
+
+.col-12{
+    color:green;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-style: italic;
+}

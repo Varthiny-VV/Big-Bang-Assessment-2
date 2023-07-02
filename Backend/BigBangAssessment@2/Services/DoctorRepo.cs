@@ -50,9 +50,9 @@ namespace BigBangAssessment_2.Services
 
         public async Task<ICollection<Doctor>?> GetAll()
         {
-            var doctors = await _context.Doctors.Include(e => e.User).Include(e => e.Speciality).ToListAsync();
-            if (doctors.Count > 0)
-                return doctors;
+            var doctors = await _context.Doctors.ToListAsync();
+            if (doctors!=null)
+                return doctors.ToList();
             return null;
         }
 

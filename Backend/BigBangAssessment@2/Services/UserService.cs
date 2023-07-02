@@ -84,12 +84,11 @@ namespace BigBangAssessment_2.Services
             var hmac = new HMACSHA512();
             string generatedPassword = await _passwordService.GeneratePasswordForDoctor(doctor);
 
-            doctor.User = new User(); // Instantiate the User object
+            doctor.User = new User();
 
             doctor.User.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(generatedPassword));
             doctor.User.PasswordKey = hmac.Key;
             doctor.User.Role = "Doctor";
-            //patient.User.Status = "Not Approved";
 
             var userResult = await _userRepo.Add(doctor.User);
             var DoctorResult = await _doctorRepo.Add(doctor);
@@ -105,16 +104,16 @@ namespace BigBangAssessment_2.Services
             return user;
         }
 
-        public async Task<Doctor> ApproveStatus(string name)
-        {
-            var approveResult = await _doctorRepo.Get(name);
-            if (approveResult != null)
-            {
-                approveResult.status = true;
-                await _doctorRepo.Update(approveResult);
-            }
-            return approveResult;
-        }
+        //public async Task<Doctor> ApproveStatus(string name)
+        //{
+        //    var approveResult = await _doctorRepo.Get(name);
+        //    if (approveResult != null)
+        //    {
+        //        approveResult.status = true;
+        //        await _doctorRepo.Update(approveResult);
+        //    }
+        //    return approveResult;
+        //}
 
     }
 }

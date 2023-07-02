@@ -8,8 +8,7 @@ namespace BigBangAssessment_2.Interfaces
         public Task<UserDTO?> Login(UserDTO user);
         public Task<UserDTO?> DoctorRegister(Doctor doctor);
         public Task<UserDTO?> PatientRegister(Patient patient);
-        public Task<Doctor?> ApproveStatus(string name);
-
+        
 
     }
 }
