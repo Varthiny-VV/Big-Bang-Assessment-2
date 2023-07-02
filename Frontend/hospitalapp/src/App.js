@@ -6,7 +6,9 @@ import PatientRegister from './components/PatientRegister';
 import Login from './components/Login';
 import Home from './components/Home';
 import DoctorRegister from './components/DoctorRegister';
-import ApproveStatus from './components/ApproveStatus';
+import AdminMenu from './components/AdminMenu';
+import ApproveStatus from "./components/ApproveStatus";
+import ViewDoctor from "./components/ViewDoctors";
 
 function App() {
   return (
@@ -17,7 +19,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/patientregister" element={<PatientRegister />} />
           <Route path="/doctorregister" element={<DoctorRegister />} />
-          <Route path="/changestatus" element={<ApproveStatus />} />
+          <Route path="/adminmenu" element={<AdminMenu />} />
+          <Route path="/approvestatus" element={<ApproveStatus />} />
+          <Route path="/viewdoctor" element={<ViewDoctor/>} />
+
 
         </Routes>
         </BrowserRouter>
