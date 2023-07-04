@@ -1,43 +1,50 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./Menu.css";
+// import "./Menu.css";
 
 function AdminMenu() {
   const navigate = useNavigate();
   var logout = () => {
-    localStorage.clear();
+
     navigate("/");
   };
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg navbar-light">
-        <h2 className="navbar-brand">VV Health Care</h2>
-        <div className="collapse navbar-collapse Menu" id="navbarNav">
-          <div>
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <Link className="nav-link" to="/viewdoctor">
+    <div class="AdminMenu">
+      <div class="container-fluid bg-container">
+            <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            <div class="col-md-2 mb-2 mb-md-0">
+                <img src={process.env.PUBLIC_URL + '/images/heart_logo.jpg'} alt="" height="50" width="50"></img>
+            </div>
+            
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li className="nav-item">
+                <Link className="nav-link px-2 " to="/viewdoctor">
                   ViewDoctor
                 </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/viewpatient">
+                </li>
+                <li className="nav-item">
+                <Link className="nav-link px-2" to="/viewpatient">
                   ViewPatient
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/approvestatus">
+                <Link className="nav-link px-2" to="/approvestatus">
                   ApproveStatus
                 </Link>
               </li>
+               
             </ul>
-          </div>
-          <div>
-            <button onClick={logout}>Logout</button>
-          </div>
-        </div>
-      </nav>
+            <div class="col-md-3 text-end">
+                <button type="button" class="btn btn-outline-dark me-2" onClick={logout}>Logout</button>
+                </div>
+            </header>
+            </div>
+
+
+
     </div>
   );
 }
 export default AdminMenu;
+
+ 

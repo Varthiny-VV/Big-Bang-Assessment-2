@@ -21,6 +21,8 @@ function Login() {
         var myData = await data.json();
         localStorage.setItem("name", myData.name);
         localStorage.setItem("role", myData.role);
+        localStorage.setItem("token",myData.token);
+        
         if (myData.role == "Admin") {
           // localStorage.setItem("managerId", myData.managerID);
           navigate("/adminmenu");
@@ -58,7 +60,9 @@ function Login() {
         </div>
         <div className="register-forget opacity">
         {/* <a href="#">Create a new account</a> */}
-        <Link to="/register">Create a new account</Link>
+        <h6>Create An Account</h6>
+        <Link to="/patientregister">Patient</Link>
+        <Link to="/doctorregister">Doctor</Link>
         <a href="#">Forgot password?</a>
         
         </div>

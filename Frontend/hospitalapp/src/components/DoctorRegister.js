@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import './DoctorRegister.css';
 import { Link } from "react-router-dom";
 
@@ -6,7 +6,7 @@ function DoctorRegister() {
   var [doctor, setDoctor] = useState({
     name: "",
     gender: "",
-    age: "",
+    age: 0,
     email: "",
     phoneNumber: "",
     speciality: "",
@@ -15,22 +15,55 @@ function DoctorRegister() {
     status: true
   });
 
-  var registerDoctor = () => {
-    fetch("http://localhost:5273/api/User/RegisterationForDoctor", {
-      method: "POST",
-      headers: {
-        accept: "text/plain",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ...doctor }),
-    })
-      .then(async (data) => {
-        var myData = await data.json();
-        console.log(myData);
+  // var registerDoctor = () => {
+  //   fetch("http://localhost:5273/api/User/RegisterationForDoctor", {
+  //     method: "POST",
+  //     headers: {
+  //       accept: "text/plain",
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ ...doctor }),
+  //   })
+  //     .then(async (data) => {
+  //       var myData = await data.json();
+  //       console.log(myData);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.error);
+  //     });
+  // };
+
+  const [registrationStatus, setRegistrationStatus] = useState(null);
+
+  useEffect(() => {
+    if (registrationStatus === "registering") {
+      // Make the API call here
+      fetch("http://localhost:5273/api/User/RegisterationForDoctor", {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(doctor),
       })
-      .catch((err) => {
-        console.log(err.error);
-      });
+        .then(async (response) => {
+          if (response.ok) {
+            setRegistrationStatus("success");
+            console.log(response);
+          } else {
+            throw new Error("Error registering doctor");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          setRegistrationStatus("error");
+        });
+    }
+  }, [registrationStatus, doctor]);
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    setRegistrationStatus("registering");
   };
 
   return (
@@ -153,11 +186,21 @@ function DoctorRegister() {
           </div>
         </div>
         <div class="col-12">
-          <button class="btn btn-primary" type="submit" onClick={registerDoctor}>
+          <button class="btn btn-primary" type="submit" onClick={handleFormSubmit}>
             Submit form
           </button>
+          <p>
+            Already have an account?{" "}
+            <Link to="/login">Login here</Link>
+          </p>
         </div>
       </form>
+      {registrationStatus === "success" && (
+        <p>Registration successful!</p>
+      )}
+      {registrationStatus === "error" && (
+        <p>Failed to register.</p>
+      )}
     </div>
   );
 }

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import './Home.css';
+
+
 const Home = () => {
   const navigate = useNavigate();
 
@@ -25,7 +27,11 @@ const Home = () => {
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
                 <li><a href="#" class="nav-link px-2">Doctors</a></li>
-                <li><a href="#" class="nav-link px-2">Gallery</a></li>
+                <li className="nav-item">
+                <Link className="nav-link px-2" to="/gallery">
+                  Gallery
+                </Link>
+              </li>
                 <li><a href="#" class="nav-link px-2">Contact Us</a></li>
                 <li><a href="#" class="nav-link px-2">About Us</a></li>
             </ul>

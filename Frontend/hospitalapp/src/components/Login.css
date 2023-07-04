@@ -15,7 +15,7 @@
     flex-direction: column;
     align-items: center;
     width: 25em;
-    height: 75vh;
+    height: 70vh;
     background-color: rgb(255, 255, 255);
     border-radius: 25px;
     opacity: 0.83;
@@ -35,7 +35,11 @@
     box-shadow: 0 0 6px rgb(166, 159, 255);
     outline: none;
     padding:10px;
-    font-size: 20px;
+    font-size: 25px;
+    
+  }
+  .input-container ::placeholder{
+    font-size: small;
   }
   input:focus{   
     box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 16px rgb(125, 115, 255);

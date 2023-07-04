@@ -1,0 +1,12 @@
+.card:hover{
+    box-shadow: 12px 2px 4px rgba(0,0,0,0.8);
+}
+
+.galleryBackground {
+    background-repeat:no-repeat;
+    background-image: url('d:\kanini\BigBangAssessment@2Solution\Frontend\hospitalapp\src\images\gallery.jpg');
+    background-position: center ;
+    background-size: cover;
+    align-items: center;
+    min-height: 100vh; 
+  }
