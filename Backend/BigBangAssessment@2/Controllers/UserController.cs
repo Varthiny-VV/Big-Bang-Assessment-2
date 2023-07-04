@@ -18,20 +18,24 @@ namespace BigBangAssessment_2.Controllers
         
         private readonly IManageUser _manageUserService;
         private readonly IRepo<string, Doctor> _doctorRepo;
+        private readonly IRepo<string, Patient> _patientRepo;
         private readonly IAdminService _adminService;
         private readonly IPatientService _patientService;
 
-        public UserController(IManageUser manageUserService, IRepo<string, Doctor> doctorRepo)
+        public UserController(IManageUser manageUserService, IRepo<string, Doctor> doctorRepo, IRepo<string, Patient> patientRepo,IAdminService adminService, IPatientService patientService)
         {
            
             _manageUserService = manageUserService;
             _doctorRepo = doctorRepo;
+            _patientRepo = patientRepo;
+            _adminService = adminService;
+            _patientService = patientService;
         }
 
         [HttpPost]
         [ProducesResponseType(typeof(UserDTO), StatusCodes.Status201Created)]//Success Response
         [ProducesResponseType(StatusCodes.Status400BadRequest)]//Failure Response
-        public async Task<ActionResult<UserDTO>> RegisterationForDoctor(DoctorRegisterDTO doctor)
+        public async Task<ActionResult<UserDTO>> RegisterationForDoctor(Doctor doctor)
         {
             
                 var result = await _manageUserService.DoctorRegister(doctor);
@@ -70,7 +74,7 @@ namespace BigBangAssessment_2.Controllers
             return BadRequest("Invalid Id or Password");
         }
         
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         [ProducesResponseType(typeof(List<Doctor>), StatusCodes.Status201Created)]//Success Response
         [ProducesResponseType(StatusCodes.Status404NotFound)]//Failure Response
@@ -98,11 +102,11 @@ namespace BigBangAssessment_2.Controllers
         [ProducesResponseType(typeof(Doctor), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]//Failure Response
 
-        public async Task<ActionResult<Doctor?>> UpdateDoctorStatus(ChangeStatusDTO status)
+        public async Task<ActionResult<Doctor?>> UpdateDoctorStatus(ChangeStatusDTO changeStatus)
         {
             try
             {
-                var doctor = await _adminService.UpdateStatus(status);
+                var doctor = await _adminService.UpdateStatus(changeStatus);
                 if (doctor != null)
                 {
                     return Ok(doctor);
@@ -126,9 +130,9 @@ namespace BigBangAssessment_2.Controllers
                 try
                 {
                     var doc = await _doctorRepo.Update(doctor);
-                    if (doctor != null)
+                    if (doc != null)
                     {
-                        return Ok(doctor);
+                        return Ok(doc);
                     }
                     return BadRequest("Not updated!");
                 }
@@ -193,7 +197,7 @@ namespace BigBangAssessment_2.Controllers
         {
             try
             {
-                var doc = await _doctorRepo.Get(name);
+                var doc = await _doctorRepo.Delete(name);
                 if (doc != null)
                 {
                     return Ok(doc);
@@ -224,6 +228,28 @@ namespace BigBangAssessment_2.Controllers
             catch (Exception)
             {
                 return BadRequest("Backend error");
+            }
+        }
+
+        [HttpGet]
+        [ProducesResponseType(typeof(List<Patient>), StatusCodes.Status201Created)]//Success Response
+        [ProducesResponseType(StatusCodes.Status404NotFound)]//Failure Response
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+        public async Task<ActionResult<ICollection<Patient>>> GetPatients()
+        {
+            try
+            {
+                var patients = await _patientRepo.GetAll();
+                if (patients != null)
+                {
+                    return Ok(patients);
+                }
+                return BadRequest("No patients available");
+            }
+            catch (Exception)
+            {
+                return BadRequest("Database error");
             }
         }
 

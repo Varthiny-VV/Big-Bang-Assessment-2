@@ -10,7 +10,7 @@ namespace BigBangAssessment_2.Services
             string password = String.Empty;
             password = doctor.Name.Substring(0, 4);
             password += "#"; 
-            password += doctor.Age;
+            password += doctor.Experience;
             return password;
         }
 
@@ -18,8 +18,7 @@ namespace BigBangAssessment_2.Services
         {
             string password = String.Empty;
             password = patient.Name.Substring(0, 4);
-            password += patient.DateOfBirth.Day;
-            password += patient.DateOfBirth.Month;
+            password += patient.BloodType;
             return password;
         }
     }

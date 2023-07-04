@@ -89,8 +89,9 @@ namespace BigBangAssessment_2
                 app.UseSwaggerUI();
             }
             app.UseAuthentication();
-            app.UseAuthorization();
             app.UseCors("MyCors");
+            app.UseAuthorization();
+            
 
 
             app.MapControllers();

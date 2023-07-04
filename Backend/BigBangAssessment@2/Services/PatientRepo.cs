@@ -51,9 +51,9 @@ namespace BigBangAssessment_2.Services
 
         public async Task<ICollection<Patient>?> GetAll()
         {
-            var patients = await _context.Patients.Include(e => e.User).Include(e => e.BloodType).ToListAsync();
-            if (patients.Count > 0)
-                return patients;
+            var patients = await _context.Patients.Include(e => e.User).ToListAsync();
+            if (patients!=null)
+                return patients.ToList();
             return null;
         }
         public async Task<Patient?> Update(Patient item)
@@ -71,7 +71,7 @@ namespace BigBangAssessment_2.Services
                 patient.AdmissionDate = item.AdmissionDate;
                 patient.DischargeDate = item.DischargeDate;       
                 patient.CurrentMedications = item.CurrentMedications;
-                patient.Symtoms = item.Symtoms;
+                patient.Symptoms = item.Symptoms;
                 await _context.SaveChangesAsync();
                 return patient;
             }

@@ -35,10 +35,11 @@ namespace BigBangAssessment_2.Migrations
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Age = table.Column<int>(type: "int", nullable: false),
                     Speciality = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Experience = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConsultationFee = table.Column<double>(type: "float", nullable: true),
-                    status = table.Column<bool>(type: "bit", nullable: true),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -66,7 +67,7 @@ namespace BigBangAssessment_2.Migrations
                     AdmissionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DischargeDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CurrentMedications = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Symtoms = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Symptoms = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: true),
                     DoctorId = table.Column<int>(type: "int", nullable: true)
                 },

@@ -34,7 +34,7 @@ namespace BigBangAssessment_2.Models
       
         public DateTime? DischargeDate { get; set; }
         public string CurrentMedications { get; set; }
-        public string? Symtoms { get; set; }
+        public string? Symptoms { get; set; }
         public User? User { get; set; }
         
         

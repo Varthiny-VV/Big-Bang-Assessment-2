@@ -33,6 +33,7 @@ namespace BigBangAssessment_2.Services
             doctor.User.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(generatedPassword));
             doctor.User.PasswordKey = hmac.Key;
             doctor.User.Role = "Doctor";
+            
 
             var userResult = await _userRepo.Add(doctor.User);
             var DoctorResult = await _doctorRepo.Add(doctor);
@@ -48,13 +49,14 @@ namespace BigBangAssessment_2.Services
             return user;
         }
 
-        public async Task<Doctor?> UpdateStatus(ChangeStatusDTO status)
+        public async Task<Doctor?> UpdateStatus(ChangeStatusDTO changeStatus)
         {
             try
             {
-                var doctor = await _doctorRepo.Get(status.Name);
-                if (doctor == null) { return null; }
-                doctor.status = true;
+                var doctor = await _doctorRepo.Get(changeStatus.Name);
+                if (doctor == null) 
+                { return null; }
+                doctor.Status = changeStatus.Status;
                 var updatedDoc = await _doctorRepo.Update(doctor);
                 if (updatedDoc == null) { return null; }
                 return updatedDoc;

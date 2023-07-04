@@ -3,7 +3,7 @@
     public class ChangeStatusDTO
     {
         public string Name { get; set; }
-        public string status { get; set; }
+        public bool Status { get; set; }
 
     }
 }

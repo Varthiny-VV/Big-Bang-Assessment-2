@@ -30,9 +30,9 @@ namespace BigBangAssessment_2.Services
             return null;
         }
 
-        public async Task<Doctor?> Get(string key)
+        public async Task<Doctor?> Get(string name)
         {
-            var doctor = _context.Doctors.FirstOrDefault(d => d.Name == key);
+            var doctor = _context.Doctors.FirstOrDefault(d => d.Name == name);
             return doctor;
         }
 
@@ -64,12 +64,11 @@ namespace BigBangAssessment_2.Services
                 doctor.Id = item.Id;
                 doctor.Name = item.Name;
                 doctor.Gender = item.Gender;
-                doctor.Age = item.Age;
                 doctor.PhoneNumber = item.PhoneNumber;
                 doctor.Speciality = item.Speciality;
                 doctor.Experience = item.Experience;
                 doctor.ConsultationFee = item.ConsultationFee;
-                doctor.status = item.status;
+                doctor.Status = item.Status;
                 doctor.PatientList = item.PatientList;
                 await _context.SaveChangesAsync();
                 return doctor;

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BigBangAssessment_2.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230630143143_init")]
+    [Migration("20230703074048_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,6 +31,9 @@ namespace BigBangAssessment_2.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
 
                     b.Property<double?>("ConsultationFee")
                         .HasColumnType("float");
@@ -57,11 +60,11 @@ namespace BigBangAssessment_2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
-
-                    b.Property<bool?>("status")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -111,7 +114,7 @@ namespace BigBangAssessment_2.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Symtoms")
+                    b.Property<string>("Symptoms")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("UserId")

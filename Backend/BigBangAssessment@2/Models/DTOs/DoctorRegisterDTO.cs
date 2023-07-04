@@ -2,6 +2,6 @@
 {
     public class DoctorRegisterDTO : Doctor
     {
-        public string PasswordClear { get; set; }
+        public string? PasswordClear { get; set; }
     }
 }
