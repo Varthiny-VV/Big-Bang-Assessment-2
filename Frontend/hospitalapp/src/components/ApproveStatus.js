@@ -6,7 +6,6 @@ import AdminMenu from "./AdminMenu";
 function ApproveStatus() {
   const [data, setData] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
-  const [doctorToDelete, setDoctorToDelete] = useState(null);
 
   useEffect(() => {
     GetAllDoctors();
@@ -67,32 +66,7 @@ function ApproveStatus() {
         console.log(err);
       });
   };
-  var deleteDoctor = (doctorName) => {
-    fetch(`http://localhost:5273/api/User/DeleteDoctor/${doctorName}`, {
-      method: "DELETE",
-      headers: {
-        accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    })
-      .then(async (response) => {
-        if (response.ok) {
-          setData((prevData) => prevData.filter((item) => item.name !== doctorName));
-          console.log("Doctor deleted successfully");
-          setShowPopup(false);
-        } else {
-          console.log("Failed to delete doctor");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  const openDeletePopup = (doctorName) => {
-    setDoctorToDelete(doctorName);
-    setShowPopup(true);
-  };
+  
   const closePopup = () => {
     setShowPopup(false);
   };
@@ -108,10 +82,9 @@ function ApproveStatus() {
               <th scope="col">Doctor Name</th>
               <th scope="col">Gender</th>
               <th scope="col">Email</th>
-              <th scope="col">Age</th>
-              <th scope="col">Speciality</th>
+              <th scope="col">Age</th>              
+              <th scope="col">Status change</th>
               <th scope="col">Status</th>
-              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -125,6 +98,7 @@ function ApproveStatus() {
                   <td>{item.email}</td>
                   <td>{item.age}</td>
                   <td>{item.speciality}</td>
+                  
                   <td>
                     <div className="select-container">
                       <select
@@ -137,13 +111,12 @@ function ApproveStatus() {
                           });
                         }}
                       >
-                        <option value="false">Deactivate</option>
                         <option value="true">Activate</option>
+                        <option value="false">Deactivate</option>
+                        
+
                       </select>
                     </div>
-                  </td>
-                  <td>
-                    <button className="deletebtn" onClick={() => openDeletePopup(item.name)}>Delete</button>
                   </td>
                 </tr>
               ))}
@@ -159,18 +132,6 @@ function ApproveStatus() {
             <button className="close-button" onClick={closePopup}>
               Close
             </button>
-            </div>
-        </div>
-      )}
-
-{showPopup && (
-        <div className="popup">
-          <div className="popup-content">
-            <p>Are you sure you want to delete this doctor?</p>
-            <div>
-              <button  onClick={deleteDoctor}>Delete</button>
-              <button onClick={closePopup}>Cancel</button>
-            </div>
           </div>
         </div>
       )}

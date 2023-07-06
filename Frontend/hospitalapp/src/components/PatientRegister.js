@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './PatientRegister.css';
 import {Link} from "react-router-dom";
+import './ApproveStatus.css';
 
 
 function PatientRegister(){

@@ -12,9 +12,17 @@ import ViewPatient from "./components/ViewPatient";
 import PatientRegister from "./components/PatientRegister";
 import DoctorMenu from "./components/DoctorMenu";
 import PatientMenu from "./components/PatientMenu";
+import ApproveStatusProc from "./components/Protected/ApproveStatusProc";
+import Doctorhome from "./components/Protected/Doctorhome";
+import Patienthome from "./components/Protected/Patienthome";
+import ViewDocForPatientsProc from "./components/Protected/ViewDocForPatientsProc";
+import ViewDocProc from "./components/Protected/ViewDocProc";
+import ViewPatientsProc from "./components/Protected/ViewPatientsProc";
+import ViewPatientsForDoc from "./components/Protected/ViewPatientsForDoc";
 import Gallery from "./components/Gallery";
 import ViewDoctorForPatient from "./components/ViewDoctorForPatient";
 import ViewPatientForDoctor from "./components/ViewPatientForDoctor";
+import Adminhome from "./components/Protected/Adminhome";
 
 function App() {
   return (
@@ -25,15 +33,15 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/patientregister" element={<PatientRegister />} />
           <Route path="/doctorregister" element={<DoctorRegister />} />
-          <Route path="/adminmenu" element={<AdminMenu />} />
-          <Route path="/approvestatus" element={<ApproveStatus />} />
-          <Route path="/viewdoctor" element={<ViewDoctor/>} />
-          <Route path="/doctormenu" element={<DoctorMenu />} />
-          <Route path="/patientmenu" element={<PatientMenu />} />
-          <Route path="/viewpatient" element={<ViewPatient/>} />
+          <Route path="/adminmenu" element={<Adminhome><AdminMenu /></Adminhome>} />
+          <Route path="/approvestatus" element={<ApproveStatusProc><ApproveStatus /></ApproveStatusProc>} />
+          <Route path="/viewdoctor" element={<ViewDocProc><ViewDoctor/></ViewDocProc>} />
+          <Route path="/doctormenu" element={<Doctorhome><DoctorMenu /></Doctorhome>} />
+          <Route path="/patientmenu" element={<Patienthome><PatientMenu /></Patienthome>} />
+          <Route path="/viewpatient" element={<ViewPatientsProc><ViewPatient/></ViewPatientsProc>} />
           <Route path="/gallery" element={<Gallery/>} />
-          <Route path="/viewdoctorforpatient" element={<ViewDoctorForPatient/>} />
-          <Route path="/viewpatientfordoctor" element={<ViewPatientForDoctor/>} />
+          <Route path="/viewdoctorforpatient" element={<ViewDocForPatientsProc><ViewDoctorForPatient/></ViewDocForPatientsProc>} />
+          <Route path="/viewpatientfordoctor" element={<ViewPatientsForDoc><ViewPatientForDoctor/></ViewPatientsForDoc>} />
 
 
         </Routes>

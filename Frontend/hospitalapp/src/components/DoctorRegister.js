@@ -1,6 +1,7 @@
-import React, { useState,useEffect } from "react";
-import './DoctorRegister.css';
+import React, { useState, useEffect } from "react";
+import "./DoctorRegister.css";
 import { Link } from "react-router-dom";
+import "./ApproveStatus.css";
 
 function DoctorRegister() {
   var [doctor, setDoctor] = useState({
@@ -12,26 +13,8 @@ function DoctorRegister() {
     speciality: "",
     experience: "",
     consultationFee: 0,
-    status: true
+    status: true,
   });
-
-  // var registerDoctor = () => {
-  //   fetch("http://localhost:5273/api/User/RegisterationForDoctor", {
-  //     method: "POST",
-  //     headers: {
-  //       accept: "text/plain",
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({ ...doctor }),
-  //   })
-  //     .then(async (data) => {
-  //       var myData = await data.json();
-  //       console.log(myData);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.error);
-  //     });
-  // };
 
   const [registrationStatus, setRegistrationStatus] = useState(null);
 
@@ -71,7 +54,9 @@ function DoctorRegister() {
       <h1 className="header transbox">Doctor Registration Form</h1>
       <form class="row g-3 transbox">
         <div class="col-md-4">
-          <label for="validationDefault01" class="form-label">Doctor Name</label>
+          <label for="validationDefault01" class="form-label">
+            Doctor Name
+          </label>
           <input
             type="text"
             class="form-control"
@@ -84,7 +69,9 @@ function DoctorRegister() {
           />
         </div>
         <div class="col-md-3">
-          <label for="validationDefault04" class="form-label">Gender</label>
+          <label for="validationDefault04" class="form-label">
+            Gender
+          </label>
           <select
             class="form-select"
             id="validationDefault04"
@@ -93,14 +80,18 @@ function DoctorRegister() {
               setDoctor({ ...doctor, gender: event.target.value });
             }}
           >
-            <option selected disabled value="Select">Select</option>
+            <option selected disabled value="Select">
+              Select
+            </option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
             <option value="Other">Other</option>
           </select>
         </div>
         <div class="col-md-4">
-          <label for="validationDefault02" class="form-label">Age</label>
+          <label for="validationDefault02" class="form-label">
+            Age
+          </label>
           <input
             type="text"
             class="form-control"
@@ -113,7 +104,9 @@ function DoctorRegister() {
           />
         </div>
         <div class="col-md-6">
-          <label for="validationDefault03" class="form-label">Email</label>
+          <label for="validationDefault03" class="form-label">
+            Email
+          </label>
           <input
             type="text"
             class="form-control"
@@ -126,7 +119,9 @@ function DoctorRegister() {
           />
         </div>
         <div class="col-md-3">
-          <label for="validationDefault05" class="form-label">PhoneNumber</label>
+          <label for="validationDefault05" class="form-label">
+            PhoneNumber
+          </label>
           <input
             type="text"
             class="form-control"
@@ -139,7 +134,9 @@ function DoctorRegister() {
           />
         </div>
         <div class="col-md-6">
-          <label for="validationDefault06" class="form-label">Speciality</label>
+          <label for="validationDefault06" class="form-label">
+            Speciality
+          </label>
           <input
             type="text"
             class="form-control"
@@ -152,7 +149,9 @@ function DoctorRegister() {
           />
         </div>
         <div class="col-md-6">
-          <label for="validationDefault07" class="form-label">Experience</label>
+          <label for="validationDefault07" class="form-label">
+            Experience
+          </label>
           <input
             type="text"
             class="form-control"
@@ -165,7 +164,9 @@ function DoctorRegister() {
           />
         </div>
         <div class="col-md-6">
-          <label for="validationDefault08" class="form-label">Consultation Fee</label>
+          <label for="validationDefault08" class="form-label">
+            Consultation Fee
+          </label>
           <input
             type="number"
             class="form-control"
@@ -179,27 +180,56 @@ function DoctorRegister() {
         </div>
         <div class="col-12">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required />
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="invalidCheck2"
+              required
+            />
             <label class="form-check-label" for="invalidCheck2">
               Agree to terms and conditions
             </label>
           </div>
         </div>
         <div class="col-12">
-          <button class="btn btn-primary" type="submit" onClick={handleFormSubmit}>
+          <button
+            class="btn btn-primary"
+            type="submit"
+            onClick={handleFormSubmit}
+          >
             Submit form
           </button>
           <p>
-            Already have an account?{" "}
-            <Link to="/login">Login here</Link>
+            Already have an account? <Link to="/login">Login here</Link>
           </p>
         </div>
       </form>
       {registrationStatus === "success" && (
-        <p>Registration successful!</p>
+        <div className="popup">
+          <div className="popup-content">
+            <p>Registration successful!</p>
+            <button
+              className="close-button"
+              onClick={() => setRegistrationStatus(null)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
       )}
       {registrationStatus === "error" && (
-        <p>Failed to register.</p>
+        <div className="popup">
+          <div className="popup-content">
+            <p>Failed to register.</p>
+            <button
+              className="close-button"
+              onClick={() => setRegistrationStatus(null)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );

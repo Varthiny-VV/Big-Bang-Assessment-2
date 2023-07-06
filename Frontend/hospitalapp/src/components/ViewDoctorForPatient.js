@@ -34,7 +34,7 @@ function ViewDoctorForPatient() {
     <div>
       <PatientMenu />
      
-      <h2 id="title">Doctor Details</h2>
+     
       <table class="table">
         <thead>
           <tr>
