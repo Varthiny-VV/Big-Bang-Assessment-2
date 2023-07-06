@@ -74,7 +74,7 @@ namespace BigBangAssessment_2.Controllers
             return BadRequest("Invalid Id or Password");
         }
         
-        //[Authorize(Roles = "Admin")]
+        
         [HttpGet]
         [ProducesResponseType(typeof(List<Doctor>), StatusCodes.Status201Created)]//Success Response
         [ProducesResponseType(StatusCodes.Status404NotFound)]//Failure Response
@@ -120,75 +120,6 @@ namespace BigBangAssessment_2.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPut]
-        [ProducesResponseType(typeof(Doctor), StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]//Failure Response
-
-        public async Task<ActionResult<Doctor?>> UpdateDoctorDetails(Doctor doctor)
-        {
-            {
-                try
-                {
-                    var doc = await _doctorRepo.Update(doctor);
-                    if (doc != null)
-                    {
-                        return Ok(doc);
-                    }
-                    return BadRequest("Not updated!");
-                }
-                catch (Exception)
-                {
-                    return BadRequest("Backend error");
-                }
-            }
-        }
-
-        [Authorize(Roles = "Admin")]
-        [HttpGet]
-        [ProducesResponseType(typeof(Doctor), StatusCodes.Status201Created)]//Success Response
-        [ProducesResponseType(StatusCodes.Status404NotFound)]//Failure Response
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-
-        public async Task<ActionResult<Doctor>> GetDoctor(string name)
-        {
-            try
-            {
-                var doctor = await _doctorRepo.Get(name);
-                if (doctor != null)
-                {
-                    return Ok(doctor);
-                }
-                return BadRequest("No doctor with that id");
-            }
-            catch (Exception)
-            {
-                return BadRequest("Database error");
-            }
-        }
-
-        [Authorize(Roles = "Admin")]
-        [HttpPost]
-        [ProducesResponseType(typeof(Doctor), StatusCodes.Status201Created)]//Success Response
-        [ProducesResponseType(StatusCodes.Status404NotFound)]//Failure Response
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<Doctor>> AddDoctor(Doctor doctor)
-        {
-            try
-            {
-                var doc = await _adminService.AddDoctor(doctor);
-                if (doctor != null)
-                {
-                    return Ok(doc);
-                }
-                return BadRequest("Doctor already exists!");
-            }
-            catch (Exception)
-            {
-                return BadRequest("Backend error!");
-            }
-        }
-
-        [Authorize(Roles = "Admin")]
         [HttpDelete]
         [ProducesResponseType(typeof(Doctor), StatusCodes.Status201Created)]//Success Response
         [ProducesResponseType(StatusCodes.Status404NotFound)]//Failure Response
@@ -209,27 +140,7 @@ namespace BigBangAssessment_2.Controllers
                 return BadRequest("Backend error!");
             }
         }
-        [Authorize(Roles = "Patient")]
-        [HttpGet]
-        [ProducesResponseType(typeof(List<DoctorListDTO>), StatusCodes.Status201Created)]//successResponse
-        [ProducesResponseType(StatusCodes.Status404NotFound)]//Failure Response
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<DoctorListDTO>> GetDocSpec()
-        {
-            try
-            {
-                var doctors = await _patientService.GetDoctors();
-                if (doctors != null)
-                {
-                    return Ok(doctors);
-                }
-                return BadRequest("No doctors found");
-            }
-            catch (Exception)
-            {
-                return BadRequest("Backend error");
-            }
-        }
+        
 
         [HttpGet]
         [ProducesResponseType(typeof(List<Patient>), StatusCodes.Status201Created)]//Success Response

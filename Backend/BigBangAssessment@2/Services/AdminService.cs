@@ -22,32 +22,7 @@ namespace BigBangAssessment_2.Services
             _passwordService = passwordService;
         }
 
-        public async Task<UserDTO?> AddDoctor(Doctor doctor)
-        {
-            UserDTO user = null;
-            var hmac = new HMACSHA512();
-            string generatedPassword = await _passwordService.GeneratePasswordForDoctor(doctor);
-
-            doctor.User = new User(); 
-
-            doctor.User.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(generatedPassword));
-            doctor.User.PasswordKey = hmac.Key;
-            doctor.User.Role = "Doctor";
-            
-
-            var userResult = await _userRepo.Add(doctor.User);
-            var DoctorResult = await _doctorRepo.Add(doctor);
-
-            if (userResult != null && DoctorResult != null)
-            {
-                user = new UserDTO();
-                user.Name = DoctorResult.Name;
-                user.Role = userResult.Role;
-                user.Token = _tokenService.GenerateToken(user);
-            }
-
-            return user;
-        }
+       
 
         public async Task<Doctor?> UpdateStatus(ChangeStatusDTO changeStatus)
         {
